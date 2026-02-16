@@ -1,0 +1,406 @@
+/* Updated: 2025-12-05T14:42:33.605Z */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #FFFFFF;
+  --color-foreground: #090D28;
+
+  --color-card: #FFFFFF;
+  --color-card-foreground: #090D28;
+
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #090D28;
+
+  --color-primary: #195AFF;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-secondary: #EFF4FF;
+  --color-secondary-foreground: #195AFF;
+
+  --color-muted: #F8F9FA;
+  --color-muted-foreground: #373844;
+
+  --color-accent: #EFF4FF;
+  --color-accent-foreground: #195AFF;
+
+  --color-destructive: #E84F4F;
+  --color-destructive-foreground: #FFFFFF;
+
+  --color-border: #E5E5E5;
+  --color-input: #E5E5E5;
+  --color-ring: #195AFF;
+
+  --color-chart-1: #195AFF;
+  --color-chart-2: #FF7A00;
+  --color-chart-3: #03008F;
+  --color-chart-4: #CBE3FA;
+  --color-chart-5: #19ADBB;
+
+  --color-sidebar: #F7F7F7;
+  --color-sidebar-foreground: #404040;
+  --color-sidebar-primary: #1a1a1a;
+  --color-sidebar-primary-foreground: #fafafa;
+  --color-sidebar-accent: #f0f0f0;
+  --color-sidebar-accent-foreground: #1a1a1a;
+  --color-sidebar-border: #d4d4d8;
+  --color-sidebar-ring: #3b82f6;
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --animate-fade-in: fade-in 1s ease-out forwards;
+  --animate-float: float 3s ease-in-out infinite;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-1rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+
+  --color-light-blue: #EFF4FF;
+  --color-border-blue: #6F9CFF;
+  --color-dark-navy: #090D28;
+  --color-deep-navy: #000839;
+  --color-deep-blue: #03008F;
+  --color-light-gray: #F8F9FA;
+  --color-medium-gray: #373844;
+  --color-light-purple: #A8B8FF;
+  --color-cyan-blue: #19ADBB;
+  --color-green: #25D366;
+  --color-orange: #FF7A00;
+  --color-red: #E84F4F;
+
+  --color-gradient-purple-start: #CBE3FA;
+  --color-gradient-purple-end: #FCEEFF;
+  --color-gradient-blue-start: #19A7FF;
+  --color-gradient-blue-end: #426CF4;
+  --color-gradient-orange-start: #FFD439;
+  --color-gradient-orange-end: #FF7A00;
+
+  --font-display: "LatinkaBoldItalic",
+  "Latinka Black Italic",
+  sans-serif;
+  --font-heading: "LatinkaBold",
+  "Latinka Black Italic",
+  sans-serif;
+  --font-body: var(--font-inter),
+  ui-sans-serif,
+  system-ui,
+  sans-serif;
+  --font-regular: var(--font-inter),
+  ui-sans-serif,
+  system-ui,
+  sans-serif;
+  --font-sans: var(--font-inter),
+  ui-sans-serif,
+  system-ui,
+  sans-serif;
+  --font-serif: "LatinkaBoldItalic",
+  serif;
+}
+
+.font-NeueMontreal_Regular {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+}
+
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
+  }
+
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --chart-1: var(--color-chart-1);
+    --chart-2: var(--color-chart-2);
+    --chart-3: var(--color-chart-3);
+    --chart-4: var(--color-chart-4);
+    --chart-5: var(--color-chart-5);
+    --radius: var(--radius-lg);
+    --sidebar-background: var(--color-sidebar);
+    --sidebar-foreground: var(--color-sidebar-foreground);
+    --sidebar-primary: var(--color-sidebar-primary);
+    --sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+    --sidebar-accent: var(--color-sidebar-accent);
+    --sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+    --sidebar-border: var(--color-sidebar-border);
+    --sidebar-ring: var(--color-sidebar-ring);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.625;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--foreground);
+  }
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 1140px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #E12E34, #ff4d52);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-pill {
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .job-card {
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    padding: 12px;
+    transition: border-color 0.2s ease;
+  }
+
+  .job-card:hover {
+    border-color: #E12E34;
+  }
+}
+
+@layer utilities {}
+
+/* tech icon animation */
+.tech-icon {
+  position: absolute;
+  width: clamp(40px, 6vw, 70px);
+  opacity: 0.95;
+  transition: transform 0.2s ease-out;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* Zig Row 1 */
+.icon1 {
+  top: 10%;
+  left: 10%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.icon2 {
+  top: 10%;
+  right: 20%;
+  animation: float 5s ease-in-out infinite 0.5s;
+}
+
+.icon7 {
+  top: 50%;
+  left: 40%;
+  animation: float 5s ease-in-out infinite 3s;
+}
+
+/* Zig Row 2 */
+.icon3 {
+  top: 10%;
+  left: 30%;
+  animation: float 5s ease-in-out infinite 1s;
+}
+
+.icon4 {
+  top: 50%;
+  right: 30%;
+  animation: float 5s ease-in-out infinite 1.5s;
+}
+
+.icon9 {
+  top: 10%;
+  right: 40%;
+  animation: float 5s ease-in-out infinite 4s;
+}
+
+/* Zig Row 3 */
+.icon8 {
+  top: 50%;
+  left: 0%;
+  animation: float 5s ease-in-out infinite 3.5s;
+}
+
+.icon5 {
+  top: 50%;
+  left: 20%;
+  animation: float 5s ease-in-out infinite 2s;
+}
+
+.icon6 {
+  top: 50%;
+  right: 10%;
+  animation: float 5s ease-in-out infinite 2.5s;
+}
+
+/* Zig Row 4 (end anchor) */
+.icon10 {
+  top: 10%;
+  right: 0%;
+  animation: float 5s ease-in-out infinite 4.5s;
+}
+
+
+.tech-icon:hover {
+  transform: scale(1.25);
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-icon {
+    width: 46px;
+  }
+}
+
+@keyframes move-left {
+  from {
+    transform: translateX(100vw);
+  }
+
+  to {
+    transform: translateX(-100vw);
+  }
+}
+
+@keyframes move-right {
+  from {
+    transform: translateX(-100vw);
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+.animate-move-left {
+  animation: move-left 60s linear infinite;
+}
+
+.animate-move-right {
+  animation: move-right 60s linear infinite;
+}
+
+@keyframes move-down {
+  from {
+    transform: translateY(-100vh);
+  }
+
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+.animate-move-down {
+  animation: move-down 40s linear infinite;
+}

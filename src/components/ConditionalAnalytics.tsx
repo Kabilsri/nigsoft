@@ -1,0 +1,60 @@
+'use client';
+
+import Script from 'next/script';
+import { useEffect, useState } from 'react';
+
+export default function ConditionalAnalytics() {
+  const [hasConsent, setHasConsent] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem('cookie-consent');
+    setHasConsent(consent === 'accepted');
+  }, []);
+
+  if (!hasConsent) return null;
+
+  return (
+    <>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  page_path: window.location.pathname,
+                  linker: {
+                    domains: ['nigsoft.com', 'blog.nigsoft.com']
+                  }
+                });
+              `,
+            }}
+          />
+        </>
+      )}
+      {process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
+        <Script
+          id="clarity-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");
+            `,
+          }}
+        />
+      )}
+    </>
+  );
+}
