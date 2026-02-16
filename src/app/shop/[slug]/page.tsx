@@ -30,10 +30,9 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-    const products = await getProducts();
-    return products.map((product) => ({
-        slug: product.slug,
-    }));
+    // Return empty array to use dynamic rendering instead of static generation
+    // This prevents database connection errors during build time on Vercel
+    return [];
 }
 
 export default async function ProductPage({ params }: PageProps) {
